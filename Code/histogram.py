@@ -1,10 +1,6 @@
 """Open file"""
 txt_file = "DrJekyllandMrHyde.txt"
 
-# Need to split words
-# Need a key, this will be word
-# Can count the word
-
 def load_file():
     """
     Desc: Load the file name or contents of the file 
