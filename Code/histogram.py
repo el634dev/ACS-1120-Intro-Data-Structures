@@ -15,7 +15,7 @@ def load_file():
         read_lines = source_text.read().splitlines()
     print(read_lines)
 
-load_file()
+# load_file()
 
 
 # -------------------
@@ -32,8 +32,9 @@ def word_frequency():
         else:
             histogram[word] = 1
     print(histogram)
+    print(f"Least amount of words: {len(histogram)}")
 
-word_frequency()
+# word_frequency()
 
 # -------------------
 def unique_words():
@@ -42,6 +43,12 @@ def unique_words():
     Args: count, integer from counting the unique words
     Return: Total count of unique words from histogram()
     """
-    print(f"Total amount of unique words: {len(txt_file)}")
+    print(f"Most amount of unique words: {len(txt_file)}")
 
-unique_words()
+# unique_words()
+
+
+if __name__ == "__main__":
+    load_file()
+    word_frequency()
+    unique_words()
