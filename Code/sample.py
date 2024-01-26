@@ -1,4 +1,4 @@
-import random
+from random import randint
 
 text = "one fish two fish red fish blue fish"
 
@@ -8,15 +8,12 @@ def random_words(histogram):
     Args: histogram
     Return: Return a word at random
     """
-    histogram = {
-        "one": 1, 
-        "fish": 4,
-        "two": 1, 
-        "red": 1, 
-        "blue": 1
-    }
-    
-    return random.shuffle(histogram)
-
+    histogram = {}
+    for word in text:
+        if word in histogram:
+            histogram[word] + 1
+        else:
+            histogram[word] = 1
+    print(histogram)
 
 random_words(text)
