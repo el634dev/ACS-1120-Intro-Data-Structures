@@ -1,5 +1,22 @@
 """Import necessary libraries"""
 import random
+from histogram import txt_file
+
+# -------------------------
+def histogram_builder(file_name):
+    """
+    Desc: Load the file name or contents of the file 
+    Args: source_text, file name or contents of the file as a string
+    Return: None
+    """
+    histogram = {}
+
+    with open(file_name, 'r', encoding="utf-8") as text_file:
+        text = text_file.read().splitlines()
+
+        for word in text:
+            histogram[word] =  histogram.get(word, 0) + 1
+    return histogram
 
 # --------------------------
 def random_words(histogram):
@@ -8,43 +25,49 @@ def random_words(histogram):
     Args: histogram, empty dictionary
     Return: Return a word at random
     """
-    count = sum(histogram.values())
+    random_sentence = []
 
-    rand_num = random.randint(1, count)
-    word_sum = 0
+    # Randomly get a word
+    words = random.choice(list(histogram.keys()))
+    random_sentence.append(words)
 
-    for word, freq in histogram.items():
-        word_sum += freq
-        if word_sum >= rand_num:
-            return word
+    for _ in range(len(words)):
+        words = random.choice(list(histogram.keys()))
+
+        # End the sentence when a . is selected
+        if words == '.':
+            random_sentence.append('.')
+            break
+        random_sentence.append(words)
+
+    length = 5
+    return ' '.join(random.choices(random_sentence, k=length))
 
 # ---------------------------
-def create_sentence(histogram, histo_length):
+def generate_percentage(histogram):
     """
-    Desc: Take a histogram and the length to create a sentence
-    Args: histogram: empty dictionary, histo_length: length of histogram
-    Return: Return a word at random
+    Desc: Take a histogram and return the percentage 
+    Args: histogram: empty dictionary
+    Return: Return the percentage of the word
     """
-    sentences = []
+    histogram_list = list(histogram.keys())
 
-    for _ in range(histo_length):
-        # Get a random word
-        word = random_words(histogram)
-        # Add the word to the list
-        sentences.append(word)
+    # select random words based on frequency
+    word_percentage = random.choices(histogram_list, weights=histogram.values(), k=1)[0]
 
-    return " ".join(sentences)
+    # Calculate word percentage 
+    word_total = sum(histogram.values())
+    count = histogram[word_percentage]
+    percentage = (count / word_total) * 100000
+
+    return word_percentage, percentage
 
 if __name__ == '__main__':
-    text = {
-        "one": 1,
-        "two": 1,
-        "three": 1,
-        "fish": 4,
-        "red": 1,
-        "blue": 1,
-    }
+    histogram = histogram_builder(txt_file)
+    random_word, text_percentage = generate_percentage(histogram)
 
-    random_sentence = create_sentence(text, 1)
-    values = f"{text[random_sentence]}"
-    print("".join(random_sentence + " => " + str(int(values))))
+    for _ in range(5):
+        new_sentence = random_words(histogram)
+        print(f"{new_sentence.strip()}.", sep='/n')
+
+    print(f"Text Percentage: {text_percentage}%")
