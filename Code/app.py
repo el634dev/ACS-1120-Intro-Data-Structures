@@ -15,7 +15,9 @@ def home():
 
     return random_words(generate_histogram)
 
-@app.route("/hello")
+# -----------------------
+# Favorites route
+@app.route("/favorites")
 def hello_world():
     """Return hello world"""
     return "<p>Hello, World!</p>"
@@ -24,4 +26,4 @@ if __name__ == "__main__":
     """To run the Flask server, execute `python app.py` in your terminal.
        To learn more about Flask's DEBUG mode, visit
        https://flask.palletsprojects.com/en/2.3.x/server/#in-code"""
-    app.run(debug=True)
+    app.run(debug=False)

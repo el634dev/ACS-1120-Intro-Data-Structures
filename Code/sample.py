@@ -62,6 +62,7 @@ def generate_percentage(histogram):
 
     return word_percentage, percentage
 
+# ------------------------
 if __name__ == '__main__':
     histogram = histogram_builder(txt_file)
     random_word, text_percentage = generate_percentage(histogram)

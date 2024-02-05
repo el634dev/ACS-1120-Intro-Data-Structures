@@ -43,7 +43,7 @@ def unique_words():
 
 # unique_words()
 
-
+# ------------------------
 if __name__ == "__main__":
     load_file()
     word_frequency()
