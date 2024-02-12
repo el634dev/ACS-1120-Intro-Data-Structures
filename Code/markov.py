@@ -49,7 +49,7 @@ class Markov:
 
         for _ in range(length - self.order):
             if current_state in self.markov:
-                # Randomly choose the next state from a list  based on the current state
+                # Randomly choose the next state from a list based on the current state
                 new_state = random.choice(self.markov[current_state])
                 # Append the line above to state on line 39
                 state.append(new_state)
