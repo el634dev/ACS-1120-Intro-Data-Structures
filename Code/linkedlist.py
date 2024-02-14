@@ -109,7 +109,7 @@ class LinkedList:
 
         while self.head is not None:
             # Update previous node to skip around node with matching data
-            if current_node.data.prev == item:
+            if current_node.data.prev == item: 
                 return True
             else:
                 current_node = None
