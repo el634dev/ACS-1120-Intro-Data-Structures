@@ -49,45 +49,74 @@ class LinkedList:
     def is_empty(self):
         """Return a boolean indicating whether this linked list is empty."""
         if self.head is not None:
-            return self.head
+            return True
         return self.head is None
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
         Running time: O(n) Why and under what conditions?"""
-        # Loop through all nodes and count one for each
         count = 0
+        node = self.head
 
-        for items in self.items():
-            ll_count = items + count
-        return ll_count
+        # Loop through all nodes and count one for each
+        while node is not None:
+            count += 1
+            node = node.next
+        return count
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: If self.is_empty() == True set the head and the tail to the new node
-        # TODO: Else append node after tail
+        # Create new node to hold given item
+        new_node = Node(item)
+        # If self.is_empty() == True set the head and the tail to the new node
+        if self.is_empty() is True:
+            self.head = new_node
+            self.tail = new_node
+        # Else append node after tail
+        else:
+            self.tail.next = new_node
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
+        # Create new node to hold given item
+        new_node = Node(item)
+        # Prepend node before head, if it exists
+        if self.is_empty() is not False:
+            self.head = new_node
+        new_node.next = self.head
 
     def find(self, matcher):
         """Return an item from this linked list if it is present.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find item, if present return True otherwise False
+        # Loop through all nodes to find item, if present return True otherwise False
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node == matcher:
+                current_node = current_node.next
+                return True
+        return False
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes to find one whose data matches given item
-        # TODO: Update previous node to skip around node with matching data
-        # TODO: Otherwise raise error to tell user that delete has failed
+        # Loop through all nodes to find one whose data matches given item
+        current_node = self.head
+
+        while self.head is not None:
+            # Update previous node to skip around node with matching data
+            if current_node.data.prev == item:
+                return True
+            else:
+                current_node = None
+                current_node = current_node.next
+            # Otherwise raise error to tell user that delete has failed
+            raise Exception('Deletion has failed')
+        raise ValueError(f'Item not found: {item}')
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
 
