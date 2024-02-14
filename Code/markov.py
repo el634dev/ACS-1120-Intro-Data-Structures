@@ -1,9 +1,8 @@
 """Implement a markov chain"""
 import random
 
-# Create a class that stores transition probabilites for different states
 class Markov:
-    """Markov chain/model class"""
+    """Create a class that stores transition probabilites for different states"""
     def __init__(self, order=1):
         """
         Desc: Initilize class Markov

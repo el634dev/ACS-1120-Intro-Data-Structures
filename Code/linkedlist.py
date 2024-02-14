@@ -48,12 +48,19 @@ class LinkedList:
 
     def is_empty(self):
         """Return a boolean indicating whether this linked list is empty."""
+        if self.head is not None:
+            return self.head
         return self.head is None
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(n) Why and under what conditions?"""
-        # TODO: Loop through all nodes and count one for each
+        Running time: O(n) Why and under what conditions?"""
+        # Loop through all nodes and count one for each
+        count = 0
+
+        for items in self.items():
+            ll_count = items + count
+        return ll_count
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
