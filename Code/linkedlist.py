@@ -59,7 +59,7 @@ class LinkedList:
         node = self.head
 
         # Loop through all nodes and count one for each
-        while node is not None:
+        while node:
             count += 1
             node = node.next
         return count
@@ -94,10 +94,9 @@ class LinkedList:
         # Loop through all nodes to find item, if present return True otherwise False
         current_node = self.head
 
-        while current_node is not None:
+        while current_node:
             if current_node == matcher:
-                current_node = current_node.next
-                return True
+                return current_node
         return False
 
     def delete(self, item):
@@ -107,13 +106,13 @@ class LinkedList:
         # Loop through all nodes to find one whose data matches given item
         current_node = self.head
 
-        while self.head is not None:
+        while current_node:
             # Update previous node to skip around node with matching data
             if current_node.data.prev == item:
                 return True
             else:
                 current_node = None
-                current_node = current_node.next
+                current_node.next = None
             # Otherwise raise error to tell user that delete has failed
             raise Exception('Deletion has failed')
         raise ValueError(f'Item not found: {item}')
