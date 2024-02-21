@@ -48,7 +48,7 @@ class LinkedList:
 
     def is_empty(self):
         """Return a boolean indicating whether this linked list is empty."""
-        if self.head is not None:
+        if self.head:
             return True
         return self.head is None
 
@@ -59,7 +59,7 @@ class LinkedList:
         node = self.head
 
         # Loop through all nodes and count one for each
-        while node:
+        while node is not None:
             count += 1
             node = node.next
         return count
@@ -76,6 +76,7 @@ class LinkedList:
         # Else append node after tail
         else:
             self.tail.next = new_node
+            self.tail = new_node
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
@@ -83,9 +84,10 @@ class LinkedList:
         # Create new node to hold given item
         new_node = Node(item)
         # Prepend node before head, if it exists
-        if self.is_empty() is not False:
+        if self.head is None:
             self.head = new_node
         new_node.next = self.head
+        self.head = new_node
 
     def find(self, matcher):
         """Return an item from this linked list if it is present.
@@ -94,9 +96,10 @@ class LinkedList:
         # Loop through all nodes to find item, if present return True otherwise False
         current_node = self.head
 
-        while current_node:
+        while current_node is not None:
             if current_node == matcher:
-                return current_node
+                return True
+            current_node = current_node.next
         return False
 
     def delete(self, item):
@@ -104,15 +107,15 @@ class LinkedList:
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # Loop through all nodes to find one whose data matches given item
+        prev_node = None
         current_node = self.head
 
-        while current_node:
+        while current_node is not None:
             # Update previous node to skip around node with matching data
-            if current_node.data.prev == item:
-                return True
+            if current_node.data == item and prev_node is not None:
+                prev_node.next = current_node.next
             else:
-                current_node = None
-                current_node.next = None
+                del current_node
             # Otherwise raise error to tell user that delete has failed
             raise Exception('Deletion has failed')
         raise ValueError(f'Item not found: {item}')
