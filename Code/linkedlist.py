@@ -47,7 +47,8 @@ class LinkedList:
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        Running time: O(n) Why and under what conditions?"""
+        Running time: O(n) for n items in the list because 
+        we need to loop through all n nodes to increment for each"""
         node = self.head
         count = 0
 
@@ -59,9 +60,11 @@ class LinkedList:
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) for n items, to append a new node we just move the 
+        nodes over to create space without a loop for a new node"""
         # Create new node to hold given item
         new_node = Node(item)
+
         # If self.is_empty() == True set the head and the tail to the new node
         if self.is_empty() == True:
             self.head = new_node
@@ -73,7 +76,8 @@ class LinkedList:
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) for n items, to prepend a new node we just add
+        a new node at the beginning of a list"""
         # Create new node to hold given item
         new_node = Node(item)
         # Prepend node before head, if it exists
@@ -86,8 +90,8 @@ class LinkedList:
 
     def find(self, matcher):
         """Return an item from this linked list if it is present.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        Best case running time: O(1) for n items, the match could be at the beginning of the list
+        Worst case running time: O(n) for n items, we need to loop through all nodes to find a match"""
         # Loop through all nodes to find item, if present return True otherwise False
         current_node = self.head
 
@@ -99,8 +103,8 @@ class LinkedList:
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(1) Why and under what conditions?
-        TODO: Worst case running time: O(N) Why and under what conditions?"""
+        Best case running time: O(1) for n items, the item could be at the beginning of a list or the head node
+        Worst case running time: O(n) for n items, we need to loop through each node to find the node to delete"""
         # Loop through all nodes to find one whose data matches given item
         current_node = self.head
         prev_node = None
@@ -120,6 +124,17 @@ class LinkedList:
         raise ValueError(f'Item not found: {item}')
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
+    def replace(self, old, new):
+        """Replace self.head with new node if equal to old"""
+        current_node = self.head
+
+        while current_node is not None:
+            if current_node.data == old:
+                current_node = new
+                return
+            current_node = current_node.next
+
+        raise ValueError(f'Item not found: {old}')
 
 def test_linked_list():
     ll = LinkedList()

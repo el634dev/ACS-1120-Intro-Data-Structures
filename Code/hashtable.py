@@ -27,7 +27,8 @@ class HashTable(object):
 
     def keys(self):
         """Return a list of all keys in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n^2) for n entries we need to loop through all buckets 
+        then we need to loop through all bucket items to return a list of keys"""
         # Collect all keys in each bucket
         all_keys = []
         for bucket in self.buckets:
@@ -37,7 +38,8 @@ class HashTable(object):
 
     def values(self):
         """Return a list of all values in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n) for n entries we need to loop through all buckets 
+        to return a list of all values"""
         all_values = []
         # Loop through all buckets
         for bucket in self.buckets:
@@ -48,7 +50,8 @@ class HashTable(object):
 
     def items(self):
         """Return a list of all items (key-value pairs) in this hash table.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n) for n entries we need to loop through all buckets 
+        to return a list of all items in the table"""
         # Collect all pairs of key-value entries in each bucket
         all_items = []
         for bucket in self.buckets:
@@ -57,7 +60,8 @@ class HashTable(object):
 
     def length(self):
         """Return the number of key-value entries by traversing its buckets.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n) for n entries we need to traverse through all buckets to 
+        increment the count"""
         count = 0
         # Loop through all buckets
         for bucket in self.buckets:
@@ -67,18 +71,20 @@ class HashTable(object):
 
     def contains(self, key):
         """Return True if this hash table contains the given key, or False.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) for n entries the hash map has direct access to each pair 
+        in the bucket and we can check the index or hash code"""
         # Find bucket where given key belongs
         index = self._bucket_index(key)
         # Check if key-value entry exists in bucket
-        if index in self.keys():
+        if key in self.keys():
             return True
         else:
             return False
 
     def get(self, key):
         """Return the value associated with the given key, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n) for n entries in the bucket we need to loop through all
+        entries in the bucket to find one value associated with the given key"""
         # Find bucket where given key belongs
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -94,7 +100,8 @@ class HashTable(object):
 
     def set(self, key, value):
         """Insert or update the given key with its associated value.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) for n entries we can insert of update a given key
+        with its associated value without using a loop and check if the pair exists"""
         # Find bucket where given key belongs
         index = self._bucket_index(key)
         bucket = self.buckets[index]
@@ -110,7 +117,8 @@ class HashTable(object):
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(n) for n entries we need to loop through all pairs in
+        the bucket to delete a given key from the table"""
         # Find bucket where given key belongs
         index = self._bucket_index(key)
         bucket = self.buckets[index]
