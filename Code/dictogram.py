@@ -44,8 +44,8 @@ class Dictogram(dict):
         random_letter = random.randint(1, self.tokens)
         total_count = 0
 
-        for word in self.items():
-            total_count += 1
+        for word, count in self.items():
+            total_count += count
             if total_count >= random_letter:
                 return word
 

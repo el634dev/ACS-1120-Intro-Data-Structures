@@ -115,6 +115,7 @@ class LinkedList:
                 if prev_node is not None:
                     prev_node.next = current_node.next
                 else:
+                    prev_node = current_node
                     self.head = current_node.next
                 return
             # Move to the next
