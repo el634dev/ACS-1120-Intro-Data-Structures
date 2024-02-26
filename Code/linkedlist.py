@@ -63,7 +63,7 @@ class LinkedList:
         # Create new node to hold given item
         new_node = Node(item)
         # If self.is_empty() == True set the head and the tail to the new node
-        if self.is_empty():
+        if self.is_empty() == True:
             self.head = new_node
             self.tail = new_node
         # Else append node after tail
@@ -77,7 +77,7 @@ class LinkedList:
         # Create new node to hold given item
         new_node = Node(item)
         # Prepend node before head, if it exists
-        if self.head is None:
+        if self.is_empty() == True:
             self.head = new_node
             self.tail = new_node
         else:
@@ -108,10 +108,10 @@ class LinkedList:
         while current_node is not None:
             # Update previous node to skip around node with matching data
             if current_node.data == item:
-                if current_node == self.head:
-                    self.head = current_node.next
-                else: 
+                if prev_node is not None:
                     prev_node.next = current_node.next
+                else:
+                    self.head = current_node.next
                 return
             # Move to the next
             prev_node = current_node
