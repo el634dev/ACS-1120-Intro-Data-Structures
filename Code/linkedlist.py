@@ -105,28 +105,39 @@ class LinkedList:
         """Delete the given item from this linked list, or raise ValueError.
         Best case running time: O(1) for n items, the item could be at the beginning of a list or the head node
         Worst case running time: O(n) for n items, we need to loop through each node to find the node to delete"""
-        # Loop through all nodes to find one whose data matches given item
-        prev_node = None
-        current_node = self.head
-
+        # Check if list is empty
         if self.is_empty():
-            raise ValueError(f'Item not found: {item}')
+            raise ValueError('List is empty, cannot delete from empty list')
 
-        while current_node is not None:
+        # Loop through all nodes to find one whose data matches given item
+        current = self.head
+        prev = None
+        found = False
+
+        while current is not None:
             # Update previous node to skip around node with matching data
-            if current_node.data == item:
-                if prev_node is not None:
-                    prev_node.next = current_node.next
-                else:
-                    self.head = current_node.next
-                return
-            else:
-                # Move to the next
-                prev_node = current_node
-                current_node = current_node.next
+            if current.data == item:
+                found = True
+                break
+            # Move to the next
+            prev = current
+            current = current.next
+
+        # If not found then raise a error
+        if not found:
             # Otherwise raise error to tell user that delete has failed
-        raise ValueError(f'Item not found: {item}')
-        # Hint: raise ValueError('Item not found: {}'.format(item))
+            raise ValueError(f'Item not found: {item}')
+            # Hint: raise ValueError('Item not found: {}'.format(item))
+
+        # If the item is found, delete it by updating the pointers
+        if current == self.head:
+            self.head = current.next
+        else:
+            prev.next = current.next
+        
+        # Update tail if needed
+        if current == self.tail:
+            self.tail = prev
 
     def replace(self, old_item, new_item):
         """Replace self.head with new node if equal to old"""

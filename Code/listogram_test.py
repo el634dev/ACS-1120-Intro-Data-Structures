@@ -47,6 +47,13 @@ class ListogramTest(unittest.TestCase):
         # Verify frequency count of unseen words
         assert histogram.frequency('food') == 0
 
+     def test_find(self):
+        ll = LinkedList(['A', 'B', 'C'])
+        assert ll.find('B') == True
+        assert ll.find('A') == True  # Match less than
+        assert ll.find('C') == True  # Match greater than
+        assert ll.find('X') == False   # No matching item
+
     def test_add_count(self):
         histogram = Listogram(self.fish_words)
         # Add more words to update frequency counts
