@@ -106,8 +106,11 @@ class LinkedList:
         Best case running time: O(1) for n items, the item could be at the beginning of a list or the head node
         Worst case running time: O(n) for n items, we need to loop through each node to find the node to delete"""
         # Loop through all nodes to find one whose data matches given item
-        current_node = self.head
         prev_node = None
+        current_node = self.head
+
+        if self.is_empty():
+            raise ValueError(f'Item not found: {item}')
 
         while current_node is not None:
             # Update previous node to skip around node with matching data
@@ -115,27 +118,26 @@ class LinkedList:
                 if prev_node is not None:
                     prev_node.next = current_node.next
                 else:
-                    prev_node = current_node
                     self.head = current_node.next
                 return
-            # Move to the next
-            prev_node = current_node
-            current_node = current_node.next
+            else:
+                # Move to the next
+                prev_node = current_node
+                current_node = current_node.next
             # Otherwise raise error to tell user that delete has failed
         raise ValueError(f'Item not found: {item}')
         # Hint: raise ValueError('Item not found: {}'.format(item))
 
-    def replace(self, old, new):
+    def replace(self, old_item, new_item):
         """Replace self.head with new node if equal to old"""
-        current_node = self.head
-
-        while current_node is not None:
-            if current_node.data == old:
-                current_node = new
-                return
-            current_node = current_node.next
-
-        raise ValueError(f'Item not found: {old}')
+        # Check if data is equal to old_item
+        if self.head.data == old_item:
+            # Create a new node with the new_item
+            new_item = Node(new_item)
+            # Set the next pointer of new node to the original next node
+            new_item.next = self.head.next
+            # Update the head to point to the newly created node
+            self.head = new_item
 
 def test_linked_list():
     ll = LinkedList()

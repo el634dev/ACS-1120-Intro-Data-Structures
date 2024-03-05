@@ -104,16 +104,16 @@ class HashTable(object):
         with its associated value without using a loop and check if the pair exists"""
         # Find bucket where given key belongs
         index = self._bucket_index(key)
-        bucket = self.buckets[index]
+        buckets = self.buckets[index]
 
         # Check if key-value entry exists in bucket
         if index in self.keys():
             if index == key:
                 # If found, update value associated with given key
-                bucket[value] = bucket.update(key)
+                buckets[value] = buckets.update(key)
         # Otherwise, insert given key-value entry into bucket
         else:
-            bucket.append((key, value))
+            buckets.append((key, value))
 
     def delete(self, key):
         """Delete the given key from this hash table, or raise KeyError.
