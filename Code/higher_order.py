@@ -33,7 +33,7 @@ class HigherOrderMarkov:
 
         for _ in range(length):
             if key in self.markov:
-                token = random.choices(list(self.markov[key].keys()), 
+                token = random.choices(list(self.markov[key].keys()),
                         weights=self.markov[key].values())[0]
                 corpus.append(token)
                 key = tuple(corpus[-self.order:])
@@ -43,7 +43,7 @@ class HigherOrderMarkov:
 
 # Higher Order Markov
 order = 2
-text = "the brown fox jumped over the lazy dog"
+text = "the brown fox jumped over the lazy dog and cow"
 sentence = text.split()
 
 high_order_markov = HigherOrderMarkov(order)
