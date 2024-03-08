@@ -37,19 +37,20 @@ def generate_sentence(markov, order, length):
     Params: markov, order - previous states or elements, length - length of markov chain
     Return: sentence with a space between
     """
-    keys = random.choice(list(markov.keys()))
-    sentences = list(keys)
+    # Select a random key from a list of keys
+    rand_key  = random.choice(list(markov.keys()))
+    keys = list(rand_key)
 
     # Loop through the range of length
     for _ in range(length):
         # Choose a random word
-        next_words = random.choice(markov[keys])
+        rand_word = random.choice(markov[rand_key])
         # Append a random word to the list
-        sentences.append(next_words)
+        keys.append(rand_word)
         # Create a tuple with the last elements of sentences
-        keys = tuple(sentences[-order:])
-    # return sentences
-    return ' '.join(sentences)
+        rand_key = tuple(keys[-order:])
+    # return a list of keys
+    return ' '.join(keys)
 
 # -------------------------
 # Read text from a file

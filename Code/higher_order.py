@@ -34,7 +34,7 @@ class HigherOrderMarkov:
                 # Assign 1 as the value and key in the dictionary
                 self.markov[key][value] = 1
             else:
-                # Add 1 as the value and key in the dictionary
+                # Add 1 to the value and key in the dictionary
                 self.markov[key][value] += 1
 
     # ---------------------------------
@@ -62,7 +62,7 @@ class HigherOrderMarkov:
                 rand_key = tuple(keys[-self.order:])
             else:
                 break
-        # Return the list of key
+        # Return the list of keys
         return keys
 
 # Higher Order Markov
