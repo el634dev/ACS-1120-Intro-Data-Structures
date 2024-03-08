@@ -7,19 +7,26 @@ def create_markov(text, order):
     """
     Desc: Create a markov chain
     Params: text - file, order - previous states or elements
-    Return: Markov chain
+    Return: Markov chain - dictionary
     """
     # Split the text to create sentences
     word = text.split()
     markov = {}
 
+    # Loop through the length of word minus the previous states
     for i in range(len(word) - order):
+        # Splice the list starting from i and ending at i + order
         keys = tuple(word[i:i + order])
+        # Assign the next word following the sequence of words
         value = word[i + order]
 
+        # If key is not in markov
         if keys not in markov:
+            # Create an empty list as the value corresponding to the key in the dictionary
             markov[keys] = []
+        # Append the value corresponding to the key in the dictionary
         markov[keys].append(value)
+    # return markov chain
     return markov
 
 # ----------------------------
@@ -33,15 +40,21 @@ def generate_sentence(markov, order, length):
     keys = random.choice(list(markov.keys()))
     sentences = list(keys)
 
+    # Loop through the range of length
     for _ in range(length):
+        # Choose a random word
         next_words = random.choice(markov[keys])
+        # Append a random word to the list
         sentences.append(next_words)
+        # Create a tuple with the last elements of sentences
         keys = tuple(sentences[-order:])
+    # return sentences
     return ' '.join(sentences)
 
 # -------------------------
 # Read text from a file
 with open('SherlockHolmes.txt', 'r', encoding='utf-8') as text_file:
+    # Read each line in the file
     text_data = text_file.read()
 
 # ---------------------------
