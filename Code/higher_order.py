@@ -45,22 +45,25 @@ class HigherOrderMarkov:
         Params: self - instance of class, length - length of markov chain
         Return: Return a body of text
         """
-        keys = random.choice(list(self.markov.keys()))
-        corpus = list(keys)
+        # Select a random key from a list of keys
+        rand_key = random.choice(list(self.markov.keys()))
+        keys = list(rand_key)
 
         # Loop through the range of length
         for _ in range(length):
             # If key is in markov chain
-            if keys in self.markov:
-                token = random.choices(list(self.markov[keys].keys()),
-                        weights=self.markov[keys].values())[0]
-                # Append the token to the list of keys
-                corpus.append(token)
+            if rand_key in self.markov:
+                # Select a random token from a list of tokens based on their weights
+                token = random.choices(list(self.markov[rand_key].keys()),
+                        weights=self.markov[rand_key].values())[0]
+                # Append the random token to the list of keys
+                keys.append(token)
                 # Create a tuple with the last elements of sentences
-                keys = tuple(corpus[-self.order:])
+                rand_key = tuple(keys[-self.order:])
             else:
                 break
-        return corpus
+        # Return the list of key
+        return keys
 
 # Higher Order Markov
 order = 2
